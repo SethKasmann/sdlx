@@ -27,13 +27,13 @@ namespace sdlx {
     Window::Window(const std::string& name)
     : _renderer(nullptr), _window(nullptr)
     {
-        init(name, DEFAULT_WIDTH, DEFAULT_HEIGHT);
+        _init(name, DEFAULT_WIDTH, DEFAULT_HEIGHT);
     }
 
     Window::Window(int width, int height, const std::string& name)
     : _renderer(nullptr), _window(nullptr)
     {
-        init(name, width, height);    
+        _init(name, width, height);    
     }
 
     Window::~Window()
@@ -42,7 +42,7 @@ namespace sdlx {
         SDL_DestroyWindow(_window);
     }
 
-    void Window::init(const std::string& name, int width, int height)
+    void Window::_init(const std::string& name, int width, int height)
     {
         _window = SDL_CreateWindow(
             name.c_str(),
