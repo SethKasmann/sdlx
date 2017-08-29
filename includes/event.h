@@ -261,6 +261,7 @@ namespace sdlx {
     public:
         Finger();
         Finger(const SDL_TouchFingerEvent* e);
+        int64_t id() const;
         float x() const;
         float y() const;
         float dx() const;
