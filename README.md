@@ -13,11 +13,11 @@ Download the repository.
   
 In the command line, type  
   
-make  
+**make**  
   
 to compile the program. To run the demo, type  
   
-make r  
+**make r**  
   
 Uncomment each function in main to try out different test cases.  
 
