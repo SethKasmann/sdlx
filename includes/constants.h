@@ -49,7 +49,7 @@ static const int CONTROLLERDOWN   = SDL_CONTROLLERBUTTONDOWN;
 Mouse Buttons
 
 Use these constants to check for mouse buttons after the MOUSEBUTTONDOWN or
-MOUSEBUTTONUP events.
+MOUSEBUTTONUP events. You can also use these with a Mouse object.
 *****************************************************************************/
 static const uint8_t BUTTON_LEFT   = SDL_BUTTON_LEFT;
 static const uint8_t BUTTON_MIDDLE = SDL_BUTTON_MIDDLE;
@@ -60,7 +60,8 @@ static const uint8_t BUTTON_X2     = SDL_BUTTON_X2;
 /*****************************************************************************
 Keyboard Keys
 
-Use these constants after a KEYDOWN or KEYUP event.
+Use these constants after a KEYDOWN or KEYUP event. You can also use these
+with a Keyboard object.
 *****************************************************************************/
 static const int KEY_LEFT      = SDL_SCANCODE_LEFT;
 static const int KEY_RIGHT     = SDL_SCANCODE_RIGHT;
@@ -143,6 +144,32 @@ static const uint8_t AXIS_RIGHTY       = SDL_CONTROLLER_AXIS_RIGHTY;
 static const uint8_t AXIS_TRIGGERLEFT  = SDL_CONTROLLER_AXIS_TRIGGERLEFT;
 static const uint8_t AXIS_TRIGGERRIGHT = SDL_CONTROLLER_AXIS_TRIGGERRIGHT;
 static const uint8_t AXIS_MAX          = SDL_CONTROLLER_AXIS_MAX;
+
+/*****************************************************************************
+Joystick Hats
+
+Available Joystick hats to check when using the joystick object.
+*****************************************************************************/
+static const int HAT_CENTERED  = SDL_HAT_CENTERED;
+static const int HAT_UP        = SDL_HAT_UP;
+static const int HAT_RIGHT     = SDL_HAT_RIGHT;
+static const int HAT_DOWN      = SDL_HAT_DOWN;
+static const int HAT_LEFT      = SDL_HAT_LEFT;
+static const int HAT_RIGHTUP   = SDL_HAT_RIGHTUP;
+static const int HAT_RIGHTDOWN = SDL_HAT_RIGHTDOWN;
+static const int HAT_LEFTUP    = SDL_HAT_LEFTUP;
+static const int HAT_LEFTDOWN  = SDL_HAT_LEFTDOWN;
+
+/*****************************************************************************
+Joystick Axis
+
+*WARNING
+Modern Joystick axis values. Do note while this is somewhat standard (0 for
+x axis and 1 for y axis), older joysticks may be different. Try calling
+num_axis() from your joystick to see what axis are available.
+*****************************************************************************/
+static const int JOY_X_AXIS = 0;
+static const int JOY_Y_AXIS = 1;
 
 /*****************************************************************************
 Window Properties
