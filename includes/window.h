@@ -141,11 +141,12 @@ namespace sdlx {
         SDL_Window* _window;
         SDL_Renderer* _renderer;
 
+        // A window should not be copied.
         Window(const Window& w);
         void operator=(const Window& w);
         
+        void _init(const std::string& name, int width, int height);
         int _set_color(int r, int g, int b, int a);
-        void init(const std::string& name, int width, int height);
         int _put_point(int x, int y);
         int _put_line(int x0, int y0, int x1, int y1);
         int _put_line(const Point* const p, size_t size);
