@@ -95,7 +95,7 @@ namespace sdlx {
 
     Button::Button()
     {
-    	_e = NULL;
+    	_e = nullptr;
     }
 
     Button::Button(const SDL_MouseButtonEvent* e)
@@ -129,7 +129,7 @@ namespace sdlx {
 
     Motion::Motion()
     {
-    	_e = NULL;
+    	_e = nullptr;
     }
 
     Motion::Motion(const SDL_MouseMotionEvent* e)
@@ -163,7 +163,7 @@ namespace sdlx {
 
     Wheel::Wheel()
     {
-    	_e = NULL;
+    	_e = nullptr;
     }
 
     Wheel::Wheel(const SDL_MouseWheelEvent* e)
@@ -187,7 +187,7 @@ namespace sdlx {
 
     Key::Key()
     {
-    	_e = NULL;
+    	_e = nullptr;
     }
 
     Key::Key(const SDL_KeyboardEvent* e)
@@ -211,12 +211,17 @@ namespace sdlx {
 
     Finger::Finger()
     {
-    	_e = NULL;
+    	_e = nullptr;
     }
 
     Finger::Finger(const SDL_TouchFingerEvent* e)
     {
         _e = e;
+    }
+
+    int64_t Finger::id() const
+    {
+        return _e->fingerId;
     }
 
     float Finger::x() const
@@ -251,7 +256,7 @@ namespace sdlx {
 
     Gesture::Gesture()
     {
-    	_e = NULL;
+    	_e = nullptr;
     }
 
     Gesture::Gesture(const SDL_MultiGestureEvent* e)
@@ -290,7 +295,7 @@ namespace sdlx {
 
     TextInput::TextInput()
     {
-    	_e = NULL;
+    	_e = nullptr;
     }
 
     TextInput::TextInput(const SDL_TextInputEvent* e)
@@ -309,7 +314,7 @@ namespace sdlx {
 
     ControllerMotion::ControllerMotion()
     {
-        _e = NULL;
+        _e = nullptr;
     }
 
     ControllerMotion::ControllerMotion(const SDL_ControllerAxisEvent* e)
@@ -352,7 +357,7 @@ namespace sdlx {
 
     WindowEvent::WindowEvent()
     {
-        _e = NULL;
+        _e = nullptr;
     }
 
     WindowEvent::WindowEvent(const SDL_WindowEvent* e)
