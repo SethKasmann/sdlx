@@ -16,43 +16,44 @@
  * this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <iostream>
 #include "device.h"
 #include "sdllib.h"
 
 namespace sdlx {
 
-	//------------------------------------------------------------------------
+    //------------------------------------------------------------------------
     // Keyboard Class
     //------------------------------------------------------------------------
 
-	Keyboard::Keyboard()
-	: _cur(SDL_GetKeyboardState(nullptr))
-	{
-		for (int i = 0; i < SDLX_NUM_SCANCODES; ++i)
-		{
-			_pre[i] = 0;
-		}
-	}
+    Keyboard::Keyboard()
+    : _cur(SDL_GetKeyboardState(nullptr))
+    {
+        for (int i = 0; i < SDLX_NUM_SCANCODES; ++i)
+        {
+            _pre[i] = 0;
+        }
+    }
 
-	bool Keyboard::down(int key)
-	{
-		if (_cur[key])
-			return true;
-		_pre[key] = _cur[key];
-		return false;
-	}
+    bool Keyboard::down(int key)
+    {
+        if (_cur[key])
+            return true;
+        _pre[key] = _cur[key];
+        return false;
+    }
 
-	bool Keyboard::pressed(int key)
-	{
-		if (down(key) && !_pre[key])
-		{
-			_pre[key] = _cur[key];
-			return true;
-		}
-	    return false;
-	}
+    bool Keyboard::pressed(int key)
+    {
+        if (down(key) && !_pre[key])
+        {
+            _pre[key] = _cur[key];
+            return true;
+        }
+        return false;
+    }
 
-	//------------------------------------------------------------------------
+    //------------------------------------------------------------------------
     // Mouse Class
     //------------------------------------------------------------------------
 
@@ -93,5 +94,78 @@ namespace sdlx {
             }
         }
         return false;
+    }
+
+    //------------------------------------------------------------------------
+    // Joystick Class
+    //------------------------------------------------------------------------
+
+    Joystick::Joystick()
+    : _joy(nullptr)
+    {
+        if (SDL_NumJoysticks() > 0)
+        {
+            SDL_JoystickEventState(SDL_ENABLE);
+            _joy = SDL_JoystickOpen(0);
+        }
+
+        if (_joy == nullptr)
+        {
+            std::cout << "Failed to open Joystick 0\n";
+        }
+    }
+
+    Joystick::~Joystick()
+    {
+        SDL_JoystickClose(_joy);
+    }
+
+    int Joystick::num_balls() const
+    {
+        return SDL_JoystickNumBalls(_joy);
+    }
+
+    int Joystick::num_buttons() const
+    {
+        return SDL_JoystickNumButtons(_joy);
+    }
+
+    int Joystick::num_hats() const
+    {
+        return SDL_JoystickNumHats(_joy);
+    }
+
+    int Joystick::num_axes() const
+    {
+        return SDL_JoystickNumAxes(_joy);
+    }
+
+    bool Joystick::down(int button) const
+    {
+        return SDL_JoystickGetButton(_joy, button);
+    }
+
+    bool Joystick::get_hat(int hat) const
+    {
+        return SDL_JoystickGetHat(_joy, hat);
+    }
+
+    int Joystick::get_axis(int axis) const
+    {
+        return SDL_JoystickGetAxis(_joy, axis);
+    }
+
+    int Joystick::get_ball_dx(int ball_index) const
+    {
+        int dx;
+        SDL_JoystickGetBall(_joy, ball_index, &dx, nullptr);
+        return dx;
+    }
+
+    int Joystick::get_ball_dy(int ball_index) const
+    {
+        int dy;
+        SDL_JoystickGetBall(_joy, ball_index, &dy, nullptr);
+        return dy;
     }
 }

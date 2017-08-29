@@ -21,6 +21,8 @@
 
 #include "types.h"
 
+class _SDL_Joystick;
+
 namespace sdlx {
 
     /*************************************************************************
@@ -76,6 +78,45 @@ namespace sdlx {
         bool pressed(uint32_t button);
     private:
         uint32_t _mask;
+    };
+
+    /*************************************************************************
+
+        A Joystick object models a simple joystick.
+
+        The function down(button) will check if a button is pressed. Do
+        note you will not find any constants defined since these buttons
+        are not standardized by SDL. You may have to do some testing. Try 0,
+        1, 2 ...
+
+        The function get_hat(int hat) will return true or false if a joystick
+        hat is triggered.
+
+        (See a list of available hats in constants.h)
+
+        The function get_axis(int axis) will return the value of the axis
+        from -32768 to 32767. Normally passing in 0 gives you the x-axis,
+        and 1 gives you the y axis. While this may not always be the case
+        for older joysticks, these constants are defined for you in
+        constants.h.
+
+    *************************************************************************/
+    class Joystick
+    {
+    public:
+        Joystick();
+        ~Joystick();
+        int num_balls() const;
+        int num_buttons() const;
+        int num_hats() const;
+        int num_axes() const;
+        bool down(int button) const;
+        bool get_hat(int hat) const;
+        int get_axis(int axis) const;
+        int get_ball_dx(int ball_index=0) const;
+        int get_ball_dy(int ball_index=0) const;
+    private:
+        _SDL_Joystick* _joy;
     };
 }
 
